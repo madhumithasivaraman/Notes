@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notes App</title>
+    <style>
+        body {
+            font-family: 'Calibri', sans-serif;
+            background-color: #f5f5dc; /* Light beige background */
+            color: #5D4037; /* Dark brown text */
+            margin: 0;
+            padding: 20px;
+        }
+
+        .heading {
+            font-size: 24px;
+            font-weight: bold;
+            color: #3E2723; /* Darker brown for heading */
+            margin-bottom: 20px;
+        }
+
+        .note-box {
+            border: 2px solid #8D6E63; /* Medium brown border */
+            padding: 20px;
+            background-color: #FFF8E1; /* Very light brown background */
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .note-box p {
+            margin: 0;
+        }
+
+        .note-box button {
+            background-color: #8D6E63; /* Medium brown button */
+            color: #FFF;
+            border: none;
+            border-radius: 3px;
+            padding: 5px 10px;
+            cursor: pointer;
+            margin-top: 10px;
+        }
+
+        .note-box button:hover {
+            background-color: #6D4C41; /* Darker brown button */
+        }
+
+        .add-note {
+            margin-bottom: 20px;
+        }
+
+        .add-note input {
+            padding: 10px;
+            width: calc(100% - 22px); /* Subtract padding and border */
+            border: 2px solid #8D6E63; /* Medium brown border */
+            border-radius: 5px;
+            margin-bottom: 10px;
+        }
+
+        .add-note button {
+            background-color: #8D6E63; /* Medium brown button */
+            color: #FFF;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            cursor: pointer;
+        }
+
+        .add-note button:hover {
+            background-color: #6D4C41; /* Darker brown button */
+        }
+    </style>
+</head>
+<body>
+    <div class="heading">Notes</div>
+    <div class="add-note">
+        <input type="text" id="noteInput" placeholder="Type your note here...">
+        <button onclick="addNote()">Add Note</button>
+    </div>
+    <div id="notesContainer"></div>
+
+    <script>
+        function addNote() {
+            const noteInput = document.getElementById('noteInput');
+            const noteText = noteInput.value;
+
+            if (noteText === '') {
+                alert('Please enter a note.');
+                return;
+            }
+
+            const notesContainer = document.getElementById('notesContainer');
+
+            const noteBox = document.createElement('div');
+            noteBox.className = 'note-box';
+
+            const noteParagraph = document.createElement('p');
+            noteParagraph.textContent = noteText;
+            noteBox.appendChild(noteParagraph);
+
+            const deleteButton = document.createElement('button');
+            deleteButton.textContent = 'Delete';
+            deleteButton.onclick = function() {
+                notesContainer.removeChild(noteBox);
+            };
+            noteBox.appendChild(deleteButton);
+
+            notesContainer.appendChild(noteBox);
+
+            noteInput.value = '';
+        }
+    </script>
+</body>
+</html>
